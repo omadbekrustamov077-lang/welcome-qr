@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<title>Xush kelibsiz</title>
+<style>
+body {
+  margin: 0;
+  background: black;
+  color: #00ff88;
+  font-family: monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.matrix {
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0,255,0,0.05),
+    rgba(0,255,0,0.05) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  z-index: -1;
+}
+.box {
+  border: 2px solid #00ff88;
+  padding: 22px;
+  max-width: 420px;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+
+<div class="matrix"></div>
+
+<div class="box">
+  <h2 id="name"></h2>
+  <p id="info"></p>
+  <p id="group"></p>
+  <p style="margin-top:14px;font-size:13px;">
+    Bu dastur KI-25.03 guruhi tomonidan tayyorlandi
+  </p>
+</div>
+
+<script>
+const p = new URLSearchParams(window.location.search);
+const name = p.get("name") || "Talaba";
+const group = p.get("group") || "";
+
+document.getElementById("name").innerText =
+  "Hurmatli " + name + "!";
+
+document.getElementById("info").innerText =
+  "Universitetga kirishingiz tasdiqlandi ✅\n\n" +
+  "Bugungi boshlagan kuningiz hayrli va barokatli o‘tsin. " +
+  "Sizga o‘qishingiz mobaynida eng kreativ faollik va kutilmagan muvaffaqiyatlar tilaymiz!";
+
+document.getElementById("group").innerText =
+  "Kokand Universiteti Andijon filiali\n" + group;
+</script>
+
+</body>
+</html>
