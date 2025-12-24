@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel | QR</title>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+
+<style>
+body {
+  margin: 0;
+  background: #020617;
+  color: #22ff99;
+  font-family: monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.panel {
+  width: 90%;
+  max-width: 420px;
+  border: 2px solid #22ff99;
+  padding: 25px;
+  box-shadow: 0 0 20px #22ff99;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  background: black;
+  border: 1px solid #22ff99;
+  color: #22ff99;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: #22ff99;
+  color: black;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#qrcode {
+  margin-top: 20px;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<div class="panel">
+  <h2>🎛 ADMIN PANEL</h2>
+
+  <input id="name" placeholder="Talaba ismi">
+  <input id="group" placeholder="Guruh (masalan: Stomatologiya 25-89)">
+
+  <button onclick="generateQR()">QR yaratish</button>
+
+  <div id="qrcode"></div>
+</div>
+
+<script>
+function generateQR() {
+  document.getElementById("qrcode").innerHTML = "";
+
+  const name = document.getElementById("name").value;
+  const group = document.getElementById("group").value;
+
+  const link =
+    "https://omadbekrustamov077-lang.github.io/welcome-qr/welcome-qr.html" +
+    "?name=" + encodeURIComponent(name) +
+    "&group=" + encodeURIComponent(group);
+
+  new QRCode(document.getElementById("qrcode"), {
+    text: link,
+    width: 220,
+    height: 220
+  });
+}
+</script>
+
+</body>
+</html>
