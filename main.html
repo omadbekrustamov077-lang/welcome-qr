@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <title>Xush kelibsiz</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 body{
@@ -14,19 +15,47 @@ body{
   justify-content:center;
   align-items:center;
   font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#1e3a8a,#2563eb);
   color:#fff;
 }
 .card{
   background:rgba(0,0,0,.45);
   backdrop-filter:blur(10px);
-  padding:28px;
+  padding:26px;
   border-radius:24px;
   width:90%;
-  max-width:420px;
+  max-width:430px;
   text-align:center;
 }
-.small{opacity:.9;font-size:14px;}
-.gift{margin-top:16px;font-size:18px;}
+h1{
+  font-size:24px;
+  font-weight:700;
+}
+.uni{
+  font-size:14px;
+  opacity:.9;
+}
+.msg{
+  margin-top:16px;
+  font-size:15px;
+  line-height:1.5;
+}
+.gift{
+  margin-top:18px;
+  font-size:18px;
+  font-weight:600;
+}
+.footer{
+  margin-top:22px;
+  font-size:13px;
+  color:#fde68a;
+  font-weight:600;
+}
+.small{
+  font-size:12px;
+  opacity:.8;
+  margin-top:4px;
+}
 </style>
 </head>
 
@@ -34,14 +63,26 @@ body{
 
 <div class="card">
   <h1 id="fullname"></h1>
-  <div class="small">Qo‘qon universiteti Andijon filiali</div>
-  <div class="small" id="group"></div>
-  <div class="gift" id="result"></div>
+  <div class="uni">Qo‘qon universiteti Andijon filiali</div>
+  <div class="uni" id="group"></div>
+
+  <div class="msg" id="message"></div>
+  <div class="gift" id="gift"></div>
+
+  <div class="footer">
+    Ki–25.03 guruhi
+    <div class="small">Rustamov tomonidan tayyorlandi</div>
+  </div>
 </div>
 
-<script> 
+<script>
+// eski natijalarni tozalaymiz (1 marta)
+if(!sessionStorage.init){
   sessionStorage.clear();
-// ==== URL dan ma’lumot ====
+  sessionStorage.init = "yes";
+}
+
+// URL dan ma’lumot
 const p = new URLSearchParams(location.search);
 const name = p.get("name") || "Talaba";
 const surname = p.get("surname") || "";
@@ -50,32 +91,48 @@ const group = p.get("group") || "";
 document.getElementById("fullname").innerText = name+" "+surname;
 document.getElementById("group").innerText = "Guruh: "+group;
 
-// ==== Fon (1 marta tanlanadi) ====
-if(!sessionStorage.bg){
-  const bgs=[
-   "linear-gradient(135deg,#4f46e5,#9333ea)",
-   "linear-gradient(135deg,#11998e,#38ef7d)",
-   "linear-gradient(135deg,#fc466b,#3f5efb)",
-   "linear-gradient(135deg,#0f2027,#203a43,#2c5364)"
-  ];
-  sessionStorage.bg=bgs[Math.floor(Math.random()*bgs.length)];
-}
-document.body.style.background=sessionStorage.bg;
+// 15 ta tabrik
+const messages = [
+"1. Ertalabgi tong hayrli bo'lsin, aziz talaba! Bugungi kunning har bir daqiqasi siz uchun yangi bilimlar va yutuqlar bilan to'lsin.",
+"2. Xayrli tong, kelajak mutaxassisi! Bugungi darslaringiz sizga yangi ufqlarni ochsin.",
+"3. Ertalabgi salom, bilim izlovchi! Har bir dars kelajakdagi muvaffaqiyatlaringiz poydevori bo'lsin.",
+"4. Tong nuri shu'lasida sog' bo'ling, talaba! Natijalaringiz a'lo bo'lsin.",
+"5. Ertalab hayrli bo'lsin, g'ayratli yoshlar! Taraqqiyotingiz tinimsiz davom etsin.",
+"6. Xayrli tong, ma'rifat faxriysi! O'z sohangizda yetakchi bo'ling.",
+"7. Ertalabgi salom, intellektual! Har bir ma'ruzada yangi g'oyalar tug'ilsin.",
+"8. Tong farovonligi bilan, talaba! Hayotiy donolik sizga hamroh bo'lsin.",
+"9. Ertalab hayrli bo'lsin, ilm izlovchi! Bugungi kun foydali o'tsin.",
+"10. Xayrli tong, universitetning yangi yulduzi!",
+"11. Ertalabgi salom, istiqbol mutaxassisi!",
+"12. Tong shu'olasi sizga ma'rifat bag'ishlasin!",
+"13. Ertalab hayrli bo'lsin, ma'rifatli yosh avlod!",
+"14. Xayrli tong, kelajak professor!",
+"15. Ertalabgi salom, universitet g'ururi!"
+];
 
-// ==== Natija (refreshda o‘zgarmaydi) ====
-if(!sessionStorage.result){
+// tabrik 1 marta tanlanadi
+if(!sessionStorage.msg){
+  sessionStorage.msg = messages[Math.floor(Math.random()*messages.length)];
+}
+document.getElementById("message").innerText = sessionStorage.msg;
+
+// sovg‘alar
+if(!sessionStorage.gift){
   let r = Math.random();
-  let text = "🎉 Sizni ko‘rib xursandmiz!";
+  let giftText = "🎉 Bugungi kuningiz omadli bo‘lsin!";
 
-  if(r < 0.4){
-    const gifts = ["🎁 Ruchka", "☕ Coffee", "🍫 Shokolad"];
-    text = "🎁 Siz uchun sovg‘a: " +
-      gifts[Math.floor(Math.random()*gifts.length)];
+  if(r < 0.35){
+    const gifts = [
+      "☕ Sizning sovg‘angiz: Coffee",
+      "🖊️ Sizning sovg‘angiz: Ruchka",
+      "🍫 Sizning sovg‘angiz: Shokolad"
+    ];
+    giftText = gifts[Math.floor(Math.random()*gifts.length)];
   }
-  sessionStorage.result = text;
-}
 
-document.getElementById("result").innerText = sessionStorage.result;
+  sessionStorage.gift = giftText;
+}
+document.getElementById("gift").innerText = sessionStorage.gift;
 </script>
 
 </body>
