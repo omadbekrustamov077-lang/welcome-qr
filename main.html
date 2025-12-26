@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<title>Tabrik</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  color:white;
+  font-family:sans-serif;
+}
+.card{
+  text-align:center;
+  background:rgba(255,255,255,0.1);
+  padding:30px;
+  border-radius:22px;
+  width:90%;
+  max-width:400px;
+}
+h1{font-size:26px;}
+p{opacity:0.9;}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h1 id="title"></h1>
+  <p id="msg"></p>
+</div>
+
+<script>
+const g=[
+ "Universitetimizga xush kelibsiz 🎉",
+ "Bugungi kuningiz omadli bo‘lsin 🌟",
+ "Yangi bosqich muborak 🎓",
+ "Sizni ko‘rib xursandmiz 😊"
+];
+
+const p=new URLSearchParams(window.location.search);
+const name=p.get("name");
+const surname=p.get("surname");
+
+document.getElementById("title").innerHTML=
+  "👋 "+name+" "+surname;
+
+document.getElementById("msg").innerText=
+  g[Math.floor(Math.random()*g.length)];
+</script>
+
+</body>
+</html>
