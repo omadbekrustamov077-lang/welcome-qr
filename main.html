@@ -2,65 +2,98 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<title>Tabrik</title>
+<title>Xush kelibsiz</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
 <style>
 body{
   margin:0;
-  height:100vh;
+  min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:linear-gradient(135deg,#0f172a,#1e293b);
-  color:white;
-  font-family:sans-serif;
+  font-family:'Poppins',sans-serif;
+  color:#fff;
 }
 .card{
-  text-align:center;
-  background:rgba(255,255,255,0.1);
-  padding:30px;
-  border-radius:22px;
+  background:rgba(0,0,0,.45);
+  backdrop-filter:blur(10px);
+  padding:28px;
+  border-radius:24px;
   width:90%;
-  max-width:400px;
+  max-width:420px;
+  text-align:center;
 }
-h1{font-size:26px;}
-p{opacity:0.9;}
+h1{margin-bottom:6px;}
+.small{opacity:.9;font-size:14px;}
+.gift{
+  margin-top:16px;
+  font-size:18px;
+}
 </style>
 </head>
+
 <body>
 
 <div class="card">
-  <h1 id="title"></h1>
-  <p id="msg"></p>
+  <h1 id="name"></h1>
+  <div class="small">Qo‘qon universiteti Andijon filiali</div>
+  <div class="small" id="group"></div>
+
+  <div class="gift" id="result"></div>
 </div>
 
 <script>
-const g=[
- "Universitetimizga xush kelibsiz 🎉",
- "Bugungi kuningiz omadli bo‘lsin 🌟",
- "Yangi bosqich muborak 🎓",
- "Sizni ko‘rib xursandmiz 😊"
-];
+// ===== URL dan ma’lumot olish =====
+const p = new URLSearchParams(location.search);
+const name = p.get("name");
+const surname = p.get("surname");
+const group = p.get("group");
 
-const p=new URLSearchParams(window.location.search);
-const name=p.get("name");
-const surname=p.get("surname");
+document.getElementById("name").innerText = name+" "+surname;
+document.getElementById("group").innerText = "Guruh: "+group;
 
-document.getElementById("title").innerHTML=
-  "👋 "+name+" "+surname;
+// ===== Fon (random, lekin 1 marta) =====
+if(!sessionStorage.bg){
+  const bgs=[
+   "linear-gradient(135deg,#4f46e5,#9333ea)",
+   "linear-gradient(135deg,#0f2027,#203a43,#2c5364)",
+   "linear-gradient(135deg,#11998e,#38ef7d)",
+   "linear-gradient(135deg,#fc466b,#3f5efb)"
+  ];
+  sessionStorage.bg=bgs[Math.floor(Math.random()*bgs.length)];
+}
+document.body.style.background=sessionStorage.bg;
 
-document.getElementById("msg").innerText=
-  g[Math.floor(Math.random()*g.length)];
-  const colors = [
-  "linear-gradient(135deg,#4f46e5,#9333ea)",
-  "linear-gradient(135deg,#0f2027,#203a43,#2c5364)",
-  "linear-gradient(135deg,#11998e,#38ef7d)",
-  "linear-gradient(135deg,#fc466b,#3f5efb)",
-  "linear-gradient(135deg,#232526,#414345)"
-];
+// ===== Sovg‘a limitlari =====
+let gifts = {
+  pen: 30,
+  coffee: 25,
+  chocolate: 30
+};
 
-document.body.style.background =
-  colors[Math.floor(Math.random() * colors.length)];
+// ===== Agar oldin tanlangan bo‘lsa =====
+if(sessionStorage.result){
+  document.getElementById("result").innerText = sessionStorage.result;
+}else{
+  let chance = Math.random(); // foizlik qaror
+  let text = "🎉 Sizni ko‘rib xursandmiz!";
+
+  if(chance < 0.4){ // 40% sovg‘a chiqadi
+    let available = Object.keys(gifts).filter(g=>gifts[g]>0);
+    if(available.length>0){
+      let g = available[Math.floor(Math.random()*available.length)];
+      gifts[g]--;
+      if(g=="pen") text="🎁 Siz uchun sovg‘a: Ruchka";
+      if(g=="coffee") text="🎁 Siz uchun sovg‘a: Coffee ☕";
+      if(g=="chocolate") text="🎁 Siz uchun sovg‘a: Shokolad 🍫";
+    }
+  }
+
+  sessionStorage.result=text;
+  document.getElementById("result").innerText=text;
+}
 </script>
 
 </body>
