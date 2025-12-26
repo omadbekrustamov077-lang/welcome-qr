@@ -25,75 +25,56 @@ body{
   max-width:420px;
   text-align:center;
 }
-h1{margin-bottom:6px;}
 .small{opacity:.9;font-size:14px;}
-.gift{
-  margin-top:16px;
-  font-size:18px;
-}
+.gift{margin-top:16px;font-size:18px;}
 </style>
 </head>
 
 <body>
 
 <div class="card">
-  <h1 id="name"></h1>
+  <h1 id="fullname"></h1>
   <div class="small">Qo‘qon universiteti Andijon filiali</div>
   <div class="small" id="group"></div>
-
   <div class="gift" id="result"></div>
 </div>
 
 <script>
-// ===== URL dan ma’lumot olish =====
+// ==== URL dan ma’lumot ====
 const p = new URLSearchParams(location.search);
-const name = p.get("name");
-const surname = p.get("surname");
-const group = p.get("group");
+const name = p.get("name") || "Talaba";
+const surname = p.get("surname") || "";
+const group = p.get("group") || "";
 
-document.getElementById("name").innerText = name+" "+surname;
+document.getElementById("fullname").innerText = name+" "+surname;
 document.getElementById("group").innerText = "Guruh: "+group;
 
-// ===== Fon (random, lekin 1 marta) =====
+// ==== Fon (1 marta tanlanadi) ====
 if(!sessionStorage.bg){
   const bgs=[
    "linear-gradient(135deg,#4f46e5,#9333ea)",
-   "linear-gradient(135deg,#0f2027,#203a43,#2c5364)",
    "linear-gradient(135deg,#11998e,#38ef7d)",
-   "linear-gradient(135deg,#fc466b,#3f5efb)"
+   "linear-gradient(135deg,#fc466b,#3f5efb)",
+   "linear-gradient(135deg,#0f2027,#203a43,#2c5364)"
   ];
   sessionStorage.bg=bgs[Math.floor(Math.random()*bgs.length)];
 }
 document.body.style.background=sessionStorage.bg;
 
-// ===== Sovg‘a limitlari =====
-let gifts = {
-  pen: 30,
-  coffee: 25,
-  chocolate: 30
-};
-
-// ===== Agar oldin tanlangan bo‘lsa =====
-if(sessionStorage.result){
-  document.getElementById("result").innerText = sessionStorage.result;
-}else{
-  let chance = Math.random(); // foizlik qaror
+// ==== Natija (refreshda o‘zgarmaydi) ====
+if(!sessionStorage.result){
+  let r = Math.random();
   let text = "🎉 Sizni ko‘rib xursandmiz!";
 
-  if(chance < 0.4){ // 40% sovg‘a chiqadi
-    let available = Object.keys(gifts).filter(g=>gifts[g]>0);
-    if(available.length>0){
-      let g = available[Math.floor(Math.random()*available.length)];
-      gifts[g]--;
-      if(g=="pen") text="🎁 Siz uchun sovg‘a: Ruchka";
-      if(g=="coffee") text="🎁 Siz uchun sovg‘a: Coffee ☕";
-      if(g=="chocolate") text="🎁 Siz uchun sovg‘a: Shokolad 🍫";
-    }
+  if(r < 0.4){
+    const gifts = ["🎁 Ruchka", "☕ Coffee", "🍫 Shokolad"];
+    text = "🎁 Siz uchun sovg‘a: " +
+      gifts[Math.floor(Math.random()*gifts.length)];
   }
-
-  sessionStorage.result=text;
-  document.getElementById("result").innerText=text;
+  sessionStorage.result = text;
 }
+
+document.getElementById("result").innerText = sessionStorage.result;
 </script>
 
 </body>
