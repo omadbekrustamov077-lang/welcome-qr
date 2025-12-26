@@ -15,16 +15,24 @@ body{
   justify-content:center;
   align-items:center;
   font-family:'Poppins',sans-serif;
-  background:linear-gradient(135deg,#1e3a8a,#2563eb);
   color:#fff;
+  background-size:cover;
+  background-position:center;
+}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
 }
 .card{
-  background:rgba(0,0,0,.45);
-  backdrop-filter:blur(10px);
+  position:relative;
+  z-index:1;
+  background:rgba(0,0,0,.4);
+  backdrop-filter:blur(8px);
   padding:26px;
   border-radius:24px;
   width:90%;
-  max-width:440px;
+  max-width:460px;
   text-align:center;
 }
 h1{
@@ -36,7 +44,7 @@ h1{
   opacity:.9;
 }
 .msg{
-  margin-top:16px;
+  margin-top:18px;
   font-size:15px;
   line-height:1.6;
 }
@@ -45,25 +53,6 @@ h1{
   font-size:17px;
   font-weight:600;
 }
-.share-bar{
-  margin-top:20px;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-.share-btn{
-  padding:12px;
-  border-radius:14px;
-  font-size:14px;
-  font-weight:600;
-  cursor:pointer;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:8px;
-}
-.share-btn.tg{ background:#229ED9; }
-.share-btn.ig{ background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045); }
 .footer{
   margin-top:22px;
   font-size:13px;
@@ -80,6 +69,7 @@ h1{
 </head>
 
 <body>
+<div class="overlay"></div>
 
 <div class="card">
   <h1 id="fullname"></h1>
@@ -89,11 +79,6 @@ h1{
   <div class="msg" id="message"></div>
   <div class="gift" id="gift"></div>
 
-  <div class="share-bar">
-    <div class="share-btn tg" onclick="shareTG()">✈️ Telegramga ulashish</div>
-    <div class="share-btn ig" onclick="shareInsta()">📸 Instagram Story</div>
-  </div>
-
   <div class="footer">
     Ki–25.03 guruhi
     <small>Rustamov tomonidan tayyorlandi</small>
@@ -101,7 +86,7 @@ h1{
 </div>
 
 <script>
-// ===== TOZALASH (1 MARTA) =====
+// ===== 1 MARTA TOZALASH =====
 if(!sessionStorage.init){
   sessionStorage.clear();
   sessionStorage.init = "ok";
@@ -113,8 +98,23 @@ const name = p.get("name") || "Talaba";
 const surname = p.get("surname") || "";
 const group = p.get("group") || "";
 
-document.getElementById("fullname").innerText = name + " " + surname;
-document.getElementById("group").innerText = "Guruh: " + group;
+document.getElementById("fullname").innerText = name+" "+surname;
+document.getElementById("group").innerText = "Guruh: "+group;
+
+// ===== ORQA FON RASMLAR (O‘ZIM TANLADIM) =====
+const backgrounds = [
+  "https://images.unsplash.com/photo-1523050854058-8df90110c9f1",
+  "https://images.unsplash.com/photo-1503676260728-1c00da094a0b",
+  "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f",
+  "https://images.unsplash.com/photo-1519452575417-564c1401ecc0",
+  "https://images.unsplash.com/photo-1529070538774-1843cb3265df"
+];
+
+if(!sessionStorage.bg){
+  sessionStorage.bg = backgrounds[Math.floor(Math.random()*backgrounds.length)];
+}
+document.body.style.backgroundImage =
+  `url('${sessionStorage.bg}')`;
 
 // ===== 15 TA TO‘LIQ TABRIK =====
 const messages = [
@@ -149,35 +149,11 @@ if(!sessionStorage.gift){
       "🖊️ Sizning sovg‘angiz: Ruchka",
       "🍫 Sizning sovg‘angiz: Shokolad"
     ];
-    text = gifts[Math.floor(Math.random()*gifts.length)];
+    text = text + "\n" + gifts[Math.floor(Math.random()*gifts.length)];
   }
   sessionStorage.gift = text;
 }
 document.getElementById("gift").innerText = sessionStorage.gift;
-
-// ===== ULASHISH =====
-function shareTG(){
-  const text =
-`Qo‘qon universiteti Andijon filiali 🎓
-${document.getElementById("fullname").innerText}
-
-${sessionStorage.msg}`;
-  window.open(
-    "https://t.me/share/url?url=" +
-    encodeURIComponent(location.href) +
-    "&text=" + encodeURIComponent(text),
-    "_blank"
-  );
-}
-
-function shareInsta(){
-  alert(
-    "📸 Instagram Story:\n\n" +
-    "1️⃣ Sahifani screenshot qiling\n" +
-    "2️⃣ Instagram → Story → joylang\n\n" +
-    "Zo‘r chiqadi 😄"
-  );
-}
 </script>
 
 </body>
