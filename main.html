@@ -39,7 +39,8 @@ body{
   <div class="gift" id="result"></div>
 </div>
 
-<script>
+<script> 
+  sessionStorage.clear();
 // ==== URL dan ma’lumot ====
 const p = new URLSearchParams(location.search);
 const name = p.get("name") || "Talaba";
