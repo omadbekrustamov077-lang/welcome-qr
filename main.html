@@ -51,6 +51,16 @@ document.getElementById("title").innerHTML=
 
 document.getElementById("msg").innerText=
   g[Math.floor(Math.random()*g.length)];
+  const colors = [
+  "linear-gradient(135deg,#4f46e5,#9333ea)",
+  "linear-gradient(135deg,#0f2027,#203a43,#2c5364)",
+  "linear-gradient(135deg,#11998e,#38ef7d)",
+  "linear-gradient(135deg,#fc466b,#3f5efb)",
+  "linear-gradient(135deg,#232526,#414345)"
+];
+
+document.body.style.background =
+  colors[Math.floor(Math.random() * colors.length)];
 </script>
 
 </body>
