@@ -1,62 +1,114 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-  <meta charset="UTF-8">
-  <title>Kirish</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body{
-      margin:0;
-      height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      background:linear-gradient(135deg,#4f46e5,#9333ea);
-      font-family:sans-serif;
-      color:white;
-    }
-    .box{
-      background:rgba(255,255,255,0.15);
-      padding:30px;
-      border-radius:20px;
-      text-align:center;
-      width:90%;
-      max-width:350px;
-    }
-    input,button{
-      width:100%;
-      padding:12px;
-      margin-top:10px;
-      border:none;
-      border-radius:12px;
-      font-size:16px;
-    }
-    button{
-      background:white;
-      color:#4f46e5;
-      font-weight:bold;
-      cursor:pointer;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Xush kelibsiz</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- chiroyli shrift -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#1e3a8a,#2563eb);
+  font-family:'Poppins',sans-serif;
+  color:#fff;
+}
+
+.card{
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(12px);
+  padding:28px;
+  border-radius:24px;
+  width:90%;
+  max-width:420px;
+  text-align:center;
+  box-shadow:0 25px 50px rgba(0,0,0,.35);
+}
+
+h2{
+  font-weight:600;
+  margin-bottom:12px;
+}
+
+p{
+  font-size:14px;
+  opacity:.95;
+  line-height:1.5;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  margin-top:12px;
+  border:none;
+  border-radius:14px;
+  font-size:15px;
+  outline:none;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  margin-top:14px;
+  border:none;
+  border-radius:16px;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.btn-main{
+  background:#fff;
+  color:#1e3a8a;
+}
+
+.btn-secondary{
+  background:rgba(255,255,255,.25);
+  color:#fff;
+}
+</style>
 </head>
+
 <body>
 
-<div class="box">
-  <h2>🎓 Xush kelibsiz</h2>
+<div class="card">
+  <h2>🎓 Hurmatli talaba!</h2>
+  <p>
+    Sizni <b>Qo‘qon universiteti Andijon filiali</b>da bugungi kunda
+    sog‘-salomat ko‘rib turganimizdan xursandmiz 😊<br><br>
+    Iltimos, <b>ism, familya va guruhingiz</b>ni yozing —
+    biz sizni xursand qilamiz 🎁
+  </p>
+
   <input id="name" placeholder="Ism">
   <input id="surname" placeholder="Familya">
-  <button onclick="go()">Davom etish</button>
+  <input id="group" placeholder="Guruh">
+
+  <button class="btn-main" onclick="go()">Davom etish 🎉</button>
+  <button class="btn-secondary" onclick="alert('Marhamat, maʼlumotlarni kiriting 😊')">
+    Qanday ishlaydi?
+  </button>
 </div>
 
 <script>
 function go(){
-  const n=document.getElementById("name").value.trim();
-  const s=document.getElementById("surname").value.trim();
-  if(!n||!s){ alert("Ism va familya kiriting"); return; }
+  const n=name.value.trim();
+  const s=surname.value.trim();
+  const g=group.value.trim();
+  if(!n||!s||!g){
+    alert("Iltimos, hamma joyni to‘ldiring");
+    return;
+  }
   window.location.href =
-    "main.html?name="+encodeURIComponent(n)+"&surname="+encodeURIComponent(s);
+   `main.html?name=${encodeURIComponent(n)}&surname=${encodeURIComponent(s)}&group=${encodeURIComponent(g)}`;
 }
 </script>
 
 </body>
-</html>
+</html> 
