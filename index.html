@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <title>Kirish</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body{
+      margin:0;
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:linear-gradient(135deg,#4f46e5,#9333ea);
+      font-family:sans-serif;
+      color:white;
+    }
+    .box{
+      background:rgba(255,255,255,0.15);
+      padding:30px;
+      border-radius:20px;
+      text-align:center;
+      width:90%;
+      max-width:350px;
+    }
+    input,button{
+      width:100%;
+      padding:12px;
+      margin-top:10px;
+      border:none;
+      border-radius:12px;
+      font-size:16px;
+    }
+    button{
+      background:white;
+      color:#4f46e5;
+      font-weight:bold;
+      cursor:pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2>🎓 Xush kelibsiz</h2>
+  <input id="name" placeholder="Ism">
+  <input id="surname" placeholder="Familya">
+  <button onclick="go()">Davom etish</button>
+</div>
+
+<script>
+function go(){
+  const n=document.getElementById("name").value.trim();
+  const s=document.getElementById("surname").value.trim();
+  if(!n||!s){ alert("Ism va familya kiriting"); return; }
+  window.location.href =
+    "main.html?name="+encodeURIComponent(n)+"&surname="+encodeURIComponent(s);
+}
+</script>
+
+</body>
+</html>
