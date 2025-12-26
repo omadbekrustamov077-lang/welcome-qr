@@ -90,7 +90,30 @@ h1{
   </div>
 </div>
 
-<script>
+<script> function shareTG(){
+  const text =
+`Qo‘qon universiteti Andijon filiali 🎓
+${document.getElementById("fullname").innerText}
+
+${sessionStorage.msg}
+
+#Welcome #Talaba`;
+  window.open(
+    "https://t.me/share/url?url=" +
+    encodeURIComponent(location.href) +
+    "&text=" + encodeURIComponent(text),
+    "_blank"
+  );
+}
+
+function shareInsta(){
+  alert(
+    "Instagram Story uchun 📸\n\n" +
+    "1️⃣ Sahifani screenshot qiling\n" +
+    "2️⃣ Instagram → Story → joylang\n\n" +
+    "Zo‘r chiqadi 😄"
+  );
+}
 // eski natijalarni tozalaymiz (1 marta)
 if(!sessionStorage.init){
   sessionStorage.clear();
