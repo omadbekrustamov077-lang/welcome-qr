@@ -7,36 +7,7 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-<style> .share-bar{
-  margin-top:18px;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
-.share-btn{
-  padding:12px 14px;
-  border-radius:14px;
-  font-size:14px;
-  font-weight:600;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-}
-
-.share-btn span{
-  font-size:18px;
-}
-
-.share-btn.tg{
-  background:#229ED9;
-}
-
-.share-btn.ig{
-  background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);
-}
+<style>
 body{
   margin:0;
   min-height:100vh;
@@ -53,7 +24,7 @@ body{
   padding:26px;
   border-radius:24px;
   width:90%;
-  max-width:430px;
+  max-width:440px;
   text-align:center;
 }
 h1{
@@ -67,56 +38,130 @@ h1{
 .msg{
   margin-top:16px;
   font-size:15px;
-  line-height:1.5;
+  line-height:1.6;
 }
 .gift{
   margin-top:18px;
-  font-size:18px;
+  font-size:17px;
   font-weight:600;
-} <div class="share-bar">
-  <div class="share-btn tg" onclick="shareTG()">
-    <span>✈️</span> Telegramga ulashish
-  </div>
-  <div class="share-btn ig" onclick="shareInsta()">
-    <span>📸</span> Instagram Story
-  </div>
-</div>
+}
+.share-bar{
+  margin-top:20px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.share-btn{
+  padding:12px;
+  border-radius:14px;
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+}
+.share-btn.tg{ background:#229ED9; }
+.share-btn.ig{ background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045); }
 .footer{
   margin-top:22px;
   font-size:13px;
-  color:#fde68a;
   font-weight:600;
+  color:#fde68a;
 }
-.small{
-  font-size:12px;
-  opacity:.8;
+.footer small{
+  display:block;
   margin-top:4px;
+  font-weight:400;
+  opacity:.9;
 }
 </style>
 </head>
 
 <body>
 
+<div class="card">
+  <h1 id="fullname"></h1>
   <div class="uni">Qo‘qon universiteti Andijon filiali</div>
   <div class="uni" id="group"></div>
 
   <div class="msg" id="message"></div>
   <div class="gift" id="gift"></div>
 
+  <div class="share-bar">
+    <div class="share-btn tg" onclick="shareTG()">✈️ Telegramga ulashish</div>
+    <div class="share-btn ig" onclick="shareInsta()">📸 Instagram Story</div>
+  </div>
+
   <div class="footer">
     Ki–25.03 guruhi
-    <div class="small">Rustamov tomonidan tayyorlandi</div>
+    <small>Rustamov tomonidan tayyorlandi</small>
   </div>
 </div>
 
-<script> function shareTG(){
+<script>
+// ===== TOZALASH (1 MARTA) =====
+if(!sessionStorage.init){
+  sessionStorage.clear();
+  sessionStorage.init = "ok";
+}
+
+// ===== URL MA'LUMOT =====
+const p = new URLSearchParams(location.search);
+const name = p.get("name") || "Talaba";
+const surname = p.get("surname") || "";
+const group = p.get("group") || "";
+
+document.getElementById("fullname").innerText = name + " " + surname;
+document.getElementById("group").innerText = "Guruh: " + group;
+
+// ===== 15 TA TO‘LIQ TABRIK =====
+const messages = [
+"Ertalabgi tong hayrli bo'lsin, aziz talaba! Bugungi kunning har bir daqiqasi siz uchun yangi bilimlar va yutuqlar bilan to'lsin. Muvaffaqiyat sizga hamroh bo‘lsin!",
+"Xayrli tong, kelajak mutaxassisi! Bugungi darslaringiz sizga yangi ufqlarni ochsin, rivojlanishingiz izchil bo‘lsin!",
+"Ertalabgi salom, bilim izlovchi! Har bir dars kelajakdagi muvaffaqiyatlaringiz poydevori bo‘lsin!",
+"Tong nuri shu'lasida sog' bo'ling, talaba! O‘qishlaringiz oson, natijalaringiz a'lo bo‘lsin!",
+"Ertalab hayrli bo'lsin, g'ayratli yoshlar! Taraqqiyotingiz tinimsiz davom etsin!",
+"Xayrli tong, ma'rifat faxriysi! O'z sohangizda yetakchi mutaxassis bo‘ling!",
+"Ertalabgi salom, intellektual! Har bir ma'ruzada yangi g‘oyalar tug‘ilsin!",
+"Tong farovonligi bilan, talaba! Hayotiy donolik sizga hamroh bo‘lsin!",
+"Ertalab hayrli bo'lsin, ilm izlovchi! Bugungi kun siz uchun foydali o'tsin!",
+"Xayrli tong, universitetning yangi yulduzi!",
+"Ertalabgi salom, istiqbol mutaxassisi!",
+"Tong shu'olasi sizga ma'rifat bag'ishlasin!",
+"Ertalab hayrli bo'lsin, ma'rifatli yosh avlod!",
+"Xayrli tong, kelajak professor!",
+"Ertalabgi salom, universitet g'ururi!"
+];
+
+if(!sessionStorage.msg){
+  sessionStorage.msg = messages[Math.floor(Math.random()*messages.length)];
+}
+document.getElementById("message").innerText = sessionStorage.msg;
+
+// ===== SOVG‘A (BA'ZIDA) =====
+if(!sessionStorage.gift){
+  let text = "🎉 Bugungi kuningiz omadli bo‘lsin!";
+  if(Math.random() < 0.35){
+    const gifts = [
+      "☕ Sizning sovg‘angiz: Coffee",
+      "🖊️ Sizning sovg‘angiz: Ruchka",
+      "🍫 Sizning sovg‘angiz: Shokolad"
+    ];
+    text = gifts[Math.floor(Math.random()*gifts.length)];
+  }
+  sessionStorage.gift = text;
+}
+document.getElementById("gift").innerText = sessionStorage.gift;
+
+// ===== ULASHISH =====
+function shareTG(){
   const text =
 `Qo‘qon universiteti Andijon filiali 🎓
 ${document.getElementById("fullname").innerText}
 
-${sessionStorage.msg}
-
-#Welcome #Talaba`;
+${sessionStorage.msg}`;
   window.open(
     "https://t.me/share/url?url=" +
     encodeURIComponent(location.href) +
@@ -127,69 +172,12 @@ ${sessionStorage.msg}
 
 function shareInsta(){
   alert(
-    "Instagram Story uchun 📸\n\n" +
+    "📸 Instagram Story:\n\n" +
     "1️⃣ Sahifani screenshot qiling\n" +
     "2️⃣ Instagram → Story → joylang\n\n" +
     "Zo‘r chiqadi 😄"
   );
 }
-// eski natijalarni tozalaymiz (1 marta)
-if(!sessionStorage.init){
-  sessionStorage.clear();
-  sessionStorage.init = "yes";
-}
-
-// URL dan ma’lumot
-const p = new URLSearchParams(location.search);
-const name = p.get("name") || "Talaba";
-const surname = p.get("surname") || "";
-const group = p.get("group") || "";
-
-document.getElementById("fullname").innerText = name+" "+surname;
-document.getElementById("group").innerText = "Guruh: "+group;
-
-// 15 ta tabrik
-const messages = [
-"Ertalabgi tong hayrli bo'lsin, aziz talaba! Bugungi kunning har bir daqiqasi siz uchun yangi bilimlar va yutuqlar bilan to'lsin. Muvaffaqiyat sizning hamyoningizda doimiy yorug' bo'lsin!",
-"Xayrli tong, kelajak mutaxassisi! Bugungi darslaringiz sizga yangi ufqlarni ochsin, o'qiganlaringiz amaliy hayotingizda asosiy tayanchingiz bo'lsin. Rivojlanishingiz doimiy va izchil bo'lsin!",
-"Ertalabgi salom, bilim izlovchi! Bugungi kun siz uchun foydali o'tsin, har bir darsda qilgan kashfiyotlaringiz kelajakdagi muvaffaqiyatlaringizning poydevori bo'lsin. Ijodingiz gullab-yashnasin!",
-"Tong nuri shu'lasida sog' bo'ling, talaba! Bugungi bilimlar to'plamingiz boyib, har bir yangi ma'lumot sizni professional yo'lingizda bir qadam oldinga olib chiqsin. O'qishlaringiz oson, natijalaringiz a'lo bo'lsin!",
-"Ertalab hayrli bo'lsin, g'ayratli yoshlar! Universitet kunlaringiz yorug' xotiralar bilan to'lsin, o'qituvchilaringiz sizga bilimdan ko'ra ko'proq — donishmandlik bersin. Taraqqiyotingiz tinimsiz davom etsin!",
-"Xayrli tong, ma'rifat faxriysi! Bugungi darslar sizni ruhan boyitsin, ilmiy izlanishlaringiz natijali bo'lsin, har bir fan sizning dunyoqarashingizni kengaytirsin. O'z sohangizda yetakchi mutaxassis bo'ling!",
-"Ertalabgi salom, intellektual! Bugungi bilimlar sizning qurolingiz, universitet esa sizning forjigingiz bo'lsin. Har bir ma'ruzada yangi g'oyalar tug'ilsin, amaliyotlarda mahoratingiz oshsin!",
-"Tong farovonligi bilan, talaba! Bugungi o'qishlaringiz sizga nafaqat diplom, balki hayotiy donolik bersin. Mutaxassisligingiz bo'yicha yetuk kadr bo'lib yetishingizga omad tilayman!",
-"Ertalab hayrli bo'lsin, ilm izlovchi! Bugungi kun sizga yangi ko'nikmalar, qiziqarli tajribalar olib kelsin. O'qituvchilaringiz sizga yo'l-yo'riq ko'rsatsin, do'stlaringiz bilan hamkorlikda o'rganing!",
-"Xayrli tong, universitetning yangi yulduzi! Bugungi darslaringiz sizning intellektual boyligingizni oshirsin, laboratoriya va amaliy mashg'ulotlarda kashfiyotlaringiz bo'lsin. O'qishdan zavqlaning va muvaffaqiyat qozoning!",
-"Ertalabgi salom, istiqbol mutaxassisi! Bugungi bilimlar sizning kelajakdagi loyihalaringizning asosi bo'lsin. Har bir fan sizga yangi imkoniyatlar ochsin, o'z sohangizda yetakchi bo'lishingizga omad!",
-"Tong shu'olasi sizga ma'rifat bag'ishlasin, talaba! Bugungi dars jarayonlari sizni kasbiy kamolot tomon olg'a intilsin. Ilm olish sizga zavq, natijalar esa g'urur olib kelsin!",
-"Ertalab hayrli bo'lsin, ma'rifatli yosh avlod! Universitetda o'tgan har bir kun sizning shaxsiy va kasbiy rivojlanishingizga xizmat qilsin. O'qituvchilar bilimlari, kitoblar donoliklari sizga yo'lchi bo'lsin!",
-"Xayrli tong, kelajak professor-o'qituvchisi! Bugungi darslaringiz samarali, o'qiganlaringiz yoddan chiqmasin, amaliyotlaringiz natijali bo'lsin. Ilm olish yo'lida har to'siqdan o'tish kuchingiz bo'lsin!",
-"Ertalabgi salom, universitet g'ururi! Bugungi kun sizga yangi bilimlar, qimmatli tajribalar olib kelsin. O'z mutaxassisligingiz bo'yicha nafaqat o'zbek, balki jahon miqyosida tanilgan mutaxassis bo'lishingizga omad tilayman!"
-];
-
-// tabrik 1 marta tanlanadi
-if(!sessionStorage.msg){
-  sessionStorage.msg = messages[Math.floor(Math.random()*messages.length)];
-}
-document.getElementById("message").innerText = sessionStorage.msg;
-
-// sovg‘alar
-if(!sessionStorage.gift){
-  let r = Math.random();
-  let giftText = "🎉 Bugungi kuningiz omadli bo‘lsin!";
-
-  if(r < 0.35){
-    const gifts = [
-      "☕ Sizning sovg‘angiz: Coffee",
-      "🖊️ Sizning sovg‘angiz: Ruchka",
-      "🍫 Sizning sovg‘angiz: Shokolad"
-    ];
-    giftText = gifts[Math.floor(Math.random()*gifts.length)];
-  }
-
-  sessionStorage.gift = giftText;
-}
-document.getElementById("gift").innerText = sessionStorage.gift;
 </script>
 
 </body>
