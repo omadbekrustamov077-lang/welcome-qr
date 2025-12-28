@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
+*{box-sizing:border-box}
 body{
   margin:0;
   min-height:100vh;
@@ -15,26 +16,42 @@ body{
   justify-content:center;
   align-items:center;
   font-family:'Poppins',sans-serif;
-  background:linear-gradient(135deg,#0f172a,#1e293b); /* ko‘k emas */
   color:#fff;
+  overflow:hidden;
+  background:#4c1d95;
 }
+
+/* BULUTLI QIMIRLAYDIGAN FON */
+.clouds{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,.25), transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,.22), transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(255,255,255,.18), transparent 50%),
+    linear-gradient(135deg,#6d28d9,#4c1d95);
+  animation: moveClouds 18s ease-in-out infinite alternate;
+  z-index:-1;
+}
+@keyframes moveClouds{
+  0%{filter:blur(0px); transform:scale(1)}
+  100%{filter:blur(2px); transform:scale(1.05)}
+}
+
 .card{
-  background:rgba(255,255,255,0.12);
-  backdrop-filter:blur(14px);
+  background:rgba(0,0,0,.35);
+  backdrop-filter:blur(12px);
   padding:28px;
   border-radius:26px;
   width:90%;
   max-width:430px;
   text-align:center;
+  box-shadow:0 25px 50px rgba(0,0,0,.4);
 }
-h2{
-  font-weight:700;
-}
-p{
-  font-size:14px;
-  line-height:1.6;
-  opacity:.95;
-}
+
+h2{font-weight:700;margin-bottom:10px}
+p{font-size:14px;line-height:1.55;opacity:.95}
+
 input{
   width:100%;
   padding:14px;
@@ -44,28 +61,31 @@ input{
   font-size:15px;
   outline:none;
 }
+
 button{
   width:100%;
   padding:15px;
   margin-top:16px;
   border:none;
-  border-radius:18px;
+  border-radius:20px;
   font-size:16px;
-  font-weight:600;
+  font-weight:700;
   cursor:pointer;
-  background:#fff;
-  color:#0f172a;
+  color:#fff;
+  background:linear-gradient(135deg,#a855f7,#7c3aed);
+  box-shadow:0 10px 25px rgba(168,85,247,.45);
 }
+button:active{transform:scale(.98)}
 </style>
 </head>
 
 <body>
+<div class="clouds"></div>
 
 <div class="card">
   <h2>🎓 Hurmatli talaba!</h2>
-
   <p>
-    Sizni <b>Qo‘qon universiteti Andijon filiali</b>da bugungi kunda
+    Sizni <b>Qo‘qon universiteti Andijon filiali</b>da
     sog‘-salomat ko‘rib turganimizdan xursandmiz 😊<br><br>
     Iltimos, <b>ism, familya va guruhingiz</b>ni kiriting —
     biz sizni xursand qilamiz 🎁
@@ -75,24 +95,22 @@ button{
   <input id="surname" placeholder="Familya">
   <input id="group" placeholder="Guruh (masalan: KI2503)">
 
-  <button onclick="go()">Davom etish 🎉</button>
+  <button onclick="go()">Davom etish</button>
 </div>
 
 <script>
 function go(){
-  const n = document.getElementById("name").value.trim();
-  const s = document.getElementById("surname").value.trim();
-  const g = document.getElementById("group").value.trim();
-
-  if(!n || !s || !g){
-    alert("Iltimos, hammasini to‘ldiring");
+  const n=document.getElementById("name").value.trim();
+  const s=document.getElementById("surname").value.trim();
+  const g=document.getElementById("group").value.trim();
+  if(!n||!s||!g){
+    alert("Iltimos, barcha maydonlarni to‘ldiring");
     return;
   }
-
-  window.location.href =
-    "main.html?name=" + encodeURIComponent(n) +
-    "&surname=" + encodeURIComponent(s) +
-    "&group=" + encodeURIComponent(g);
+  location.href=
+   "main.html?name="+encodeURIComponent(n)+
+   "&surname="+encodeURIComponent(s)+
+   "&group="+encodeURIComponent(g);
 }
 </script>
 
