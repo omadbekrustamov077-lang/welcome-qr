@@ -15,33 +15,26 @@ body{
   justify-content:center;
   align-items:center;
   font-family:'Poppins',sans-serif;
-  background:linear-gradient(135deg,#0f172a,#1e293b,#312e81);
+  background:linear-gradient(135deg,#0f172a,#1e293b); /* ko‘k emas */
   color:#fff;
 }
-
 .card{
   background:rgba(255,255,255,0.12);
   backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  padding:30px;
+  padding:28px;
   border-radius:26px;
   width:90%;
-  max-width:440px;
+  max-width:430px;
   text-align:center;
-  box-shadow:0 30px 60px rgba(0,0,0,.45);
 }
-
 h2{
   font-weight:700;
-  margin-bottom:12px;
 }
-
 p{
   font-size:14px;
   line-height:1.6;
   opacity:.95;
 }
-
 input{
   width:100%;
   padding:14px;
@@ -51,18 +44,17 @@ input{
   font-size:15px;
   outline:none;
 }
-
 button{
   width:100%;
   padding:15px;
-  margin-top:18px;
+  margin-top:16px;
   border:none;
   border-radius:18px;
   font-size:16px;
   font-weight:600;
   cursor:pointer;
-  background:linear-gradient(135deg,#6366f1,#8b5cf6);
-  color:#fff;
+  background:#fff;
+  color:#0f172a;
 }
 </style>
 </head>
@@ -73,7 +65,7 @@ button{
   <h2>🎓 Hurmatli talaba!</h2>
 
   <p>
-    Sizni <b>Qo‘qon universiteti Andijon filiali</b>da
+    Sizni <b>Qo‘qon universiteti Andijon filiali</b>da bugungi kunda
     sog‘-salomat ko‘rib turganimizdan xursandmiz 😊<br><br>
     Iltimos, <b>ism, familya va guruhingiz</b>ni kiriting —
     biz sizni xursand qilamiz 🎁
@@ -88,17 +80,19 @@ button{
 
 <script>
 function go(){
-  const n=name.value.trim();
-  const s=surname.value.trim();
-  const g=group.value.trim();
-  if(!n||!s||!g){
-    alert("Iltimos, hamma joyni to‘ldiring");
+  const n = document.getElementById("name").value.trim();
+  const s = document.getElementById("surname").value.trim();
+  const g = document.getElementById("group").value.trim();
+
+  if(!n || !s || !g){
+    alert("Iltimos, hammasini to‘ldiring");
     return;
   }
+
   window.location.href =
-    "main.html?name="+encodeURIComponent(n)+
-    "&surname="+encodeURIComponent(s)+
-    "&group="+encodeURIComponent(g);
+    "main.html?name=" + encodeURIComponent(n) +
+    "&surname=" + encodeURIComponent(s) +
+    "&group=" + encodeURIComponent(g);
 }
 </script>
 
