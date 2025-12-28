@@ -14,56 +14,55 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  background:linear-gradient(180deg,#1e40af,#2563eb,#1e3a8a);
   font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#0f172a,#1e293b,#312e81);
   color:#fff;
 }
 
 .card{
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  padding:30px;
+  border-radius:26px;
   width:90%;
-  max-width:430px;
-  background:rgba(255,255,255,0.18);
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-  border-radius:28px;
-  padding:28px;
+  max-width:440px;
   text-align:center;
-  box-shadow:0 30px 60px rgba(0,0,0,.35);
+  box-shadow:0 30px 60px rgba(0,0,0,.45);
 }
 
 h2{
-  font-size:26px;
   font-weight:700;
-  margin-bottom:10px;
+  margin-bottom:12px;
 }
 
 p{
-  font-size:15px;
+  font-size:14px;
   line-height:1.6;
   opacity:.95;
 }
 
 input{
   width:100%;
-  padding:16px;
-  margin-top:14px;
+  padding:14px;
+  margin-top:12px;
   border:none;
-  border-radius:18px;
+  border-radius:16px;
   font-size:15px;
   outline:none;
 }
 
 button{
   width:100%;
+  padding:15px;
   margin-top:18px;
-  padding:16px;
   border:none;
-  border-radius:20px;
-  background:#fff;
-  color:#1e3a8a;
-  font-size:17px;
-  font-weight:700;
+  border-radius:18px;
+  font-size:16px;
+  font-weight:600;
   cursor:pointer;
+  background:linear-gradient(135deg,#6366f1,#8b5cf6);
+  color:#fff;
 }
 </style>
 </head>
@@ -74,7 +73,7 @@ button{
   <h2>🎓 Hurmatli talaba!</h2>
 
   <p>
-    Sizni <b>Qo‘qon universiteti Andijon filiali</b>da bugungi kunda
+    Sizni <b>Qo‘qon universiteti Andijon filiali</b>da
     sog‘-salomat ko‘rib turganimizdan xursandmiz 😊<br><br>
     Iltimos, <b>ism, familya va guruhingiz</b>ni kiriting —
     biz sizni xursand qilamiz 🎁
@@ -89,15 +88,13 @@ button{
 
 <script>
 function go(){
-  const n = name.value.trim();
-  const s = surname.value.trim();
-  const g = group.value.trim();
-
-  if(!n || !s || !g){
-    alert("Iltimos, barcha maydonlarni to‘ldiring");
+  const n=name.value.trim();
+  const s=surname.value.trim();
+  const g=group.value.trim();
+  if(!n||!s||!g){
+    alert("Iltimos, hamma joyni to‘ldiring");
     return;
   }
-
   window.location.href =
     "main.html?name="+encodeURIComponent(n)+
     "&surname="+encodeURIComponent(s)+
@@ -106,4 +103,4 @@ function go(){
 </script>
 
 </body>
-</html>
+</html> 
