@@ -2,135 +2,153 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<title>Xush kelibsiz</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<title>Xush kelibsiz</title>
 
 <style>
-/* ==== ORQA FON ==== */
-body{
+*{
   margin:0;
-  min-height:100vh;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Segoe UI",sans-serif;
+}
+
+body{
+  height:100vh;
+  overflow:hidden;
   display:flex;
   justify-content:center;
   align-items:center;
-  font-family:'Poppins',sans-serif;
-  background:linear-gradient(180deg,#0f3c78,#1e6bd6);
-  overflow:hidden;
-  color:#fff;
+  background:#0b1c2d;
 }
 
-/* BULUTLAR */
+/* ===== OSMON ===== */
+.sky{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(180deg,#081726,#0e2a45,#081f33);
+  z-index:-2;
+  overflow:hidden;
+}
+
+/* ===== BULUTLAR ===== */
 .cloud{
   position:absolute;
-  background:rgba(255,255,255,0.18);
+  width:420px;
+  height:180px;
   border-radius:50%;
-  filter:blur(8px);
-  animation:moveClouds linear infinite;
-}
-.cloud.c1{ width:260px;height:90px; top:15%; left:-300px; animation-duration:60s;}
-.cloud.c2{ width:200px;height:70px; top:35%; left:-250px; animation-duration:80s;}
-.cloud.c3{ width:300px;height:110px; top:55%; left:-350px; animation-duration:100s;}
-
-@keyframes moveClouds{
-  from{ transform:translateX(0); }
-  to{ transform:translateX(140vw); }
+  filter:blur(45px);
+  opacity:.35;
+  animation:cloudMove 16s linear infinite;
 }
 
-/* ==== KARTA ==== */
+.cloud.light{
+  background:rgba(255,255,255,0.15);
+}
+.cloud.dark{
+  background:rgba(0,0,0,0.35);
+}
+
+.cloud:nth-child(1){ top:15%; animation-duration:14s; }
+.cloud:nth-child(2){ top:35%; animation-duration:18s; }
+.cloud:nth-child(3){ top:55%; animation-duration:12s; }
+.cloud:nth-child(4){ top:72%; animation-duration:20s; }
+
+@keyframes cloudMove{
+  from{ left:-50%; }
+  to{ left:120%; }
+}
+
+/* ===== GLASS CARD ===== */
 .card{
-  position:relative;
-  background:rgba(255,255,255,0.12);
-  backdrop-filter:blur(12px);
-  padding:26px 22px;
-  border-radius:24px;
-  width:86%;
-  max-width:380px;
+  width:90%;
+  max-width:420px;
+  padding:30px 22px;
+  border-radius:22px;
+  background:rgba(255,255,255,0.18);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  box-shadow:
+    0 15px 40px rgba(0,0,0,.4),
+    inset 0 0 0 1px rgba(255,255,255,.25);
+  color:#fff;
   text-align:center;
-  box-shadow:0 25px 50px rgba(0,0,0,.35);
 }
 
-h2{
-  font-weight:700;
-  margin-bottom:12px;
+h1{
+  font-size:26px;
+  margin-bottom:14px;
+  text-shadow:0 3px 10px rgba(0,0,0,.6);
 }
 
 p{
-  font-size:14px;
-  line-height:1.55;
+  font-size:15px;
+  line-height:1.6;
   opacity:.95;
 }
 
-/* INPUTLAR */
+/* INPUT */
 input{
   width:100%;
-  padding:13px;
-  margin-top:12px;
+  margin-top:14px;
+  padding:14px;
   border:none;
   border-radius:14px;
   font-size:15px;
   outline:none;
+  background:rgba(255,255,255,.95);
+  color:#111;
 }
 
-/* TUGMA */
+/* BUTTON */
 button{
   width:100%;
+  margin-top:22px;
   padding:14px;
-  margin-top:16px;
+  font-size:17px;
   border:none;
-  border-radius:18px;
-  font-size:16px;
-  font-weight:600;
+  border-radius:16px;
   cursor:pointer;
-  background:linear-gradient(135deg,#6d28d9,#8b5cf6);
   color:#fff;
+  background:linear-gradient(135deg,#7a3cff,#9b5cff);
+  box-shadow:0 6px 22px rgba(0,0,0,.45);
+}
+button:active{
+  transform:scale(.97);
 }
 </style>
 </head>
 
 <body>
 
-<!-- BULUTLAR -->
-<div class="cloud c1"></div>
-<div class="cloud c2"></div>
-<div class="cloud c3"></div>
+<!-- BACKGROUND -->
+<div class="sky">
+  <div class="cloud light"></div>
+  <div class="cloud dark"></div>
+  <div class="cloud light"></div>
+  <div class="cloud dark"></div>
+</div>
 
-<!-- KARTA -->
+<!-- CARD -->
 <div class="card">
-  <h2>🎓 Hurmatli talaba!</h2>
+  <h1>🎓 Hurmatli talaba!</h1>
 
   <p>
-    Sizni <b>Qo‘qon universiteti Andijon filiali</b>da
-    sog‘-salomat ko‘rib turganimizdan xursandmiz 😊<br><br>
-    Iltimos, <b>ism, familya va guruhingiz</b>ni kiriting —
+    Sizni <b>Qo‘qon universiteti Andijon filialida</b><br>
+    sog‘-salomat ko‘rib turganimizdan xursandmiz 😊
+  </p>
+
+  <p style="margin-top:12px">
+    Iltimos, <b>ism, familiya va guruhingizni</b> kiriting —
     biz sizni xursand qilamiz 🎁
   </p>
 
-  <input id="name" placeholder="Ism">
-  <input id="surname" placeholder="Familya">
-  <input id="group" placeholder="Guruh (masalan: KI2503)">
+  <input type="text" placeholder="Ism">
+  <input type="text" placeholder="Familiya">
+  <input type="text" placeholder="Guruh (masalan: KI2503)">
 
-  <button onclick="go()">Davom etish 🎉</button>
+  <button>Davom etish 🎉</button>
 </div>
 
-<script>
-function go(){
-  const n = document.getElementById("name").value.trim();
-  const s = document.getElementById("surname").value.trim();
-  const g = document.getElementById("group").value.trim();
-
-  if(!n || !s || !g){
-    alert("Iltimos, barcha maydonlarni to‘ldiring");
-    return;
-  }
-
-  window.location.href =
-    "main.html?name=" + encodeURIComponent(n) +
-    "&surname=" + encodeURIComponent(s) +
-    "&group=" + encodeURIComponent(g);
-}
-</script>
-
 </body>
-</html> 
+</html> and 
