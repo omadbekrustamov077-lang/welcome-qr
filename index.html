@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-html, body{
+html,body{
   margin:0;
   padding:0;
   height:100%;
@@ -17,45 +17,47 @@ html, body{
   color:#fff;
 }
 
-/* ASOSIY FON */
+/* 🌌 TUNGI OSMON */
 body{
   display:flex;
   justify-content:center;
   align-items:center;
-  background:linear-gradient(135deg,#1e3a8a,#2563eb);
+  background:
+    radial-gradient(circle at top, #1e293b, #020617 70%);
 }
 
-/* BULUT ANIMATSIYASI */
+/* ☁️ TINIQ BULUTLAR */
 .clouds{
   position:fixed;
-  top:0;
-  left:0;
-  width:200%;
+  inset:0;
+  width:300%;
   height:100%;
-  background:url("https://i.imgur.com/NM6pZ8P.png") repeat-x;
-  background-size:contain;
-  animation:cloudMove 120s linear infinite;
-  opacity:0.35;
+  background:url("https://i.imgur.com/JYJqYzF.png") repeat-x;
+  background-size:800px 300px;
+  animation:cloudMove 180s linear infinite;
+  opacity:0.55;
+  filter:blur(1px);
   z-index:1;
 }
 
 @keyframes cloudMove{
   from{transform:translateX(0);}
-  to{transform:translateX(-50%);}
+  to{transform:translateX(-66%);}
 }
 
-/* KARTA */
+/* 🧊 GLASS CARD */
 .card{
   position:relative;
   z-index:2;
-  background:rgba(255,255,255,0.12);
-  backdrop-filter:blur(12px);
+  background:rgba(255,255,255,0.10);
+  backdrop-filter:blur(14px);
   padding:28px;
   border-radius:26px;
   width:90%;
   max-width:430px;
   text-align:center;
-  box-shadow:0 25px 50px rgba(0,0,0,.35);
+  box-shadow:0 30px 60px rgba(0,0,0,.6);
+  border:1px solid rgba(255,255,255,0.12);
 }
 
 h2{
@@ -66,7 +68,7 @@ h2{
 p{
   font-size:14px;
   line-height:1.55;
-  opacity:.95;
+  opacity:.92;
 }
 
 input{
@@ -79,20 +81,25 @@ input{
   outline:none;
 }
 
+/* 🔘 YANGI TUGMA RANGI */
 button{
   width:100%;
   padding:15px;
-  margin-top:16px;
+  margin-top:18px;
   border:none;
   border-radius:18px;
   font-size:16px;
   font-weight:600;
   cursor:pointer;
+  background:linear-gradient(135deg,#22d3ee,#38bdf8);
+  color:#020617;
+  box-shadow:0 12px 25px rgba(56,189,248,.45);
+  transition:.25s;
 }
 
-.btn-main{
-  background:#fff;
-  color:#1e3a8a;
+button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 18px 35px rgba(56,189,248,.65);
 }
 </style>
 </head>
@@ -105,8 +112,8 @@ button{
   <h2>🎓 Hurmatli talaba!</h2>
 
   <p>
-    Sizni <b>Qo‘qon universiteti Andijon filiali</b>da bugungi kunda
-    sog‘-salomat ko‘rib turganimizdan xursandmiz 😊<br><br>
+    Sizni <b>Qo‘qon universiteti Andijon filiali</b>da
+    ko‘rib turganimizdan xursandmiz 😊<br><br>
     Iltimos, <b>ism, familya va guruhingiz</b>ni kiriting —
     biz sizni xursand qilamiz 🎁
   </p>
@@ -115,24 +122,24 @@ button{
   <input id="surname" placeholder="Familya">
   <input id="group" placeholder="Guruh (masalan: KI2503)">
 
-  <button class="btn-main" onclick="go()">Davom etish 🎉</button>
+  <button onclick="go()">Davom etish 🚀</button>
 </div>
 
 <script>
 function go(){
-  const n = document.getElementById("name").value.trim();
-  const s = document.getElementById("surname").value.trim();
-  const g = document.getElementById("group").value.trim();
+  const n = name.value.trim();
+  const s = surname.value.trim();
+  const g = group.value.trim();
 
   if(!n || !s || !g){
     alert("Iltimos, barcha maydonlarni to‘ldiring");
     return;
   }
 
-  window.location.href =
-    "main.html?name=" + encodeURIComponent(n) +
-    "&surname=" + encodeURIComponent(s) +
-    "&group=" + encodeURIComponent(g);
+  location.href =
+    "main.html?name="+encodeURIComponent(n)+
+    "&surname="+encodeURIComponent(s)+
+    "&group="+encodeURIComponent(g);
 }
 </script>
 
