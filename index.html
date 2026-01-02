@@ -2,153 +2,139 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Xush kelibsiz</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-*{
+html, body{
   margin:0;
   padding:0;
-  box-sizing:border-box;
-  font-family:"Segoe UI",sans-serif;
+  height:100%;
+  overflow:hidden;
+  font-family:'Poppins',sans-serif;
+  color:#fff;
 }
 
+/* ASOSIY FON */
 body{
-  height:100vh;
-  overflow:hidden;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:#0b1c2d;
+  background:linear-gradient(135deg,#1e3a8a,#2563eb);
 }
 
-/* ===== OSMON ===== */
-.sky{
+/* BULUT ANIMATSIYASI */
+.clouds{
   position:fixed;
-  inset:0;
-  background:linear-gradient(180deg,#081726,#0e2a45,#081f33);
-  z-index:-2;
-  overflow:hidden;
+  top:0;
+  left:0;
+  width:200%;
+  height:100%;
+  background:url("https://i.imgur.com/NM6pZ8P.png") repeat-x;
+  background-size:contain;
+  animation:cloudMove 120s linear infinite;
+  opacity:0.35;
+  z-index:1;
 }
-
-/* ===== BULUTLAR ===== */
-.cloud{
-  position:absolute;
-  width:420px;
-  height:180px;
-  border-radius:50%;
-  filter:blur(45px);
-  opacity:.35;
-  animation:cloudMove 16s linear infinite;
-}
-
-.cloud.light{
-  background:rgba(255,255,255,0.15);
-}
-.cloud.dark{
-  background:rgba(0,0,0,0.35);
-}
-
-.cloud:nth-child(1){ top:15%; animation-duration:14s; }
-.cloud:nth-child(2){ top:35%; animation-duration:18s; }
-.cloud:nth-child(3){ top:55%; animation-duration:12s; }
-.cloud:nth-child(4){ top:72%; animation-duration:20s; }
 
 @keyframes cloudMove{
-  from{ left:-50%; }
-  to{ left:120%; }
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
 }
 
-/* ===== GLASS CARD ===== */
+/* KARTA */
 .card{
+  position:relative;
+  z-index:2;
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(12px);
+  padding:28px;
+  border-radius:26px;
   width:90%;
-  max-width:420px;
-  padding:30px 22px;
-  border-radius:22px;
-  background:rgba(255,255,255,0.18);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  box-shadow:
-    0 15px 40px rgba(0,0,0,.4),
-    inset 0 0 0 1px rgba(255,255,255,.25);
-  color:#fff;
+  max-width:430px;
   text-align:center;
+  box-shadow:0 25px 50px rgba(0,0,0,.35);
 }
 
-h1{
-  font-size:26px;
-  margin-bottom:14px;
-  text-shadow:0 3px 10px rgba(0,0,0,.6);
+h2{
+  font-weight:700;
+  margin-bottom:12px;
 }
 
 p{
-  font-size:15px;
-  line-height:1.6;
+  font-size:14px;
+  line-height:1.55;
   opacity:.95;
 }
 
-/* INPUT */
 input{
   width:100%;
-  margin-top:14px;
   padding:14px;
-  border:none;
-  border-radius:14px;
-  font-size:15px;
-  outline:none;
-  background:rgba(255,255,255,.95);
-  color:#111;
-}
-
-/* BUTTON */
-button{
-  width:100%;
-  margin-top:22px;
-  padding:14px;
-  font-size:17px;
+  margin-top:12px;
   border:none;
   border-radius:16px;
-  cursor:pointer;
-  color:#fff;
-  background:linear-gradient(135deg,#7a3cff,#9b5cff);
-  box-shadow:0 6px 22px rgba(0,0,0,.45);
+  font-size:15px;
+  outline:none;
 }
-button:active{
-  transform:scale(.97);
+
+button{
+  width:100%;
+  padding:15px;
+  margin-top:16px;
+  border:none;
+  border-radius:18px;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.btn-main{
+  background:#fff;
+  color:#1e3a8a;
 }
 </style>
 </head>
 
 <body>
 
-<!-- BACKGROUND -->
-<div class="sky">
-  <div class="cloud light"></div>
-  <div class="cloud dark"></div>
-  <div class="cloud light"></div>
-  <div class="cloud dark"></div>
-</div>
+<div class="clouds"></div>
 
-<!-- CARD -->
 <div class="card">
-  <h1>🎓 Hurmatli talaba!</h1>
+  <h2>🎓 Hurmatli talaba!</h2>
 
   <p>
-    Sizni <b>Qo‘qon universiteti Andijon filialida</b><br>
-    sog‘-salomat ko‘rib turganimizdan xursandmiz 😊
-  </p>
-
-  <p style="margin-top:12px">
-    Iltimos, <b>ism, familiya va guruhingizni</b> kiriting —
+    Sizni <b>Qo‘qon universiteti Andijon filiali</b>da bugungi kunda
+    sog‘-salomat ko‘rib turganimizdan xursandmiz 😊<br><br>
+    Iltimos, <b>ism, familya va guruhingiz</b>ni kiriting —
     biz sizni xursand qilamiz 🎁
   </p>
 
-  <input type="text" placeholder="Ism">
-  <input type="text" placeholder="Familiya">
-  <input type="text" placeholder="Guruh (masalan: KI2503)">
+  <input id="name" placeholder="Ism">
+  <input id="surname" placeholder="Familya">
+  <input id="group" placeholder="Guruh (masalan: KI2503)">
 
-  <button>Davom etish 🎉</button>
+  <button class="btn-main" onclick="go()">Davom etish 🎉</button>
 </div>
 
+<script>
+function go(){
+  const n = document.getElementById("name").value.trim();
+  const s = document.getElementById("surname").value.trim();
+  const g = document.getElementById("group").value.trim();
+
+  if(!n || !s || !g){
+    alert("Iltimos, barcha maydonlarni to‘ldiring");
+    return;
+  }
+
+  window.location.href =
+    "main.html?name=" + encodeURIComponent(n) +
+    "&surname=" + encodeURIComponent(s) +
+    "&group=" + encodeURIComponent(g);
+}
+</script>
+
 </body>
-</html> and 
+</html> 
