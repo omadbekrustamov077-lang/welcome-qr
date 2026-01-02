@@ -127,12 +127,21 @@ button:hover{
 
 <script>
 function go(){
-  const n = name.value.trim();
-  const s = surname.value.trim();
-  const g = group.value.trim();
+  const n = document.getElementById("name").value.trim();
+  const s = document.getElementById("surname").value.trim();
+  const g = document.getElementById("group").value.trim();
 
   if(!n || !s || !g){
     alert("Iltimos, barcha maydonlarni to‘ldiring");
+    return;
+  }
+
+  window.location.href =
+    "main.html?name=" + encodeURIComponent(n) +
+    "&surname=" + encodeURIComponent(s) +
+    "&group=" + encodeURIComponent(g);
+}
+</script>
     return;
   }
 
