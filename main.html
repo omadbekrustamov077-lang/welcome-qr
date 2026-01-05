@@ -16,43 +16,64 @@ body{
   align-items:center;
   font-family:'Poppins',sans-serif;
   color:#fff;
+
+  /* === UNIVERSITET ORQA FONI === */
+  background-image:url("university-night.jpg");
   background-size:cover;
-  background-position:center;
+  background-position:center 18%;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
 }
+
+/* === TUNGI OVERLAY (pushti–siyohrang) === */
 .overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.45);
+  background:linear-gradient(
+    to bottom,
+    rgba(15,0,35,.65),
+    rgba(0,0,0,.6)
+  );
 }
+
+/* === ASOSIY CARD === */
 .card{
   position:relative;
   z-index:1;
-  background:rgba(0,0,0,.4);
-  backdrop-filter:blur(8px);
-  padding:26px;
-  border-radius:24px;
+  background:rgba(0,0,0,.45);
+  backdrop-filter:blur(10px);
+  padding:28px;
+  border-radius:26px;
   width:90%;
   max-width:460px;
   text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.45);
 }
+
 h1{
   font-size:24px;
   font-weight:700;
+  margin-bottom:6px;
 }
+
 .uni{
   font-size:14px;
   opacity:.9;
 }
+
 .msg{
   margin-top:18px;
   font-size:15px;
   line-height:1.6;
 }
+
 .gift{
   margin-top:18px;
   font-size:17px;
   font-weight:600;
+  color:#f9a8d4;
 }
+
 .footer{
   margin-top:22px;
   font-size:13px;
@@ -63,7 +84,7 @@ h1{
   display:block;
   margin-top:4px;
   font-weight:400;
-  opacity:.9;
+  opacity:.85;
 }
 </style>
 </head>
@@ -99,40 +120,15 @@ const surname = p.get("surname") || "";
 const group = p.get("group") || "";
 
 document.getElementById("fullname").innerText = name+" "+surname;
-document.getElementById("group").innerText = "Guruh: "+group;
+document.getElementById("group").innerText = group ? "Guruh: "+group : "";
 
-// ===== ORQA FON RASMLAR (O‘ZIM TANLADIM) =====
-const backgrounds = [
-  "https://images.unsplash.com/photo-1523050854058-8df90110c9f1",
-  "https://images.unsplash.com/photo-1503676260728-1c00da094a0b",
-  "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f",
-  "https://images.unsplash.com/photo-1519452575417-564c1401ecc0",
-  "https://images.unsplash.com/photo-1529070538774-1843cb3265df"
-];
-
-if(!sessionStorage.bg){
-  sessionStorage.bg = backgrounds[Math.floor(Math.random()*backgrounds.length)];
-}
-document.body.style.backgroundImage =
-  `url('${sessionStorage.bg}')`;
-
-// ===== 15 TA TO‘LIQ TABRIK =====
+// ===== TABRIKLAR =====
 const messages = [
-"Ertalabgi tong hayrli bo'lsin, aziz talaba! Bugungi kunning har bir daqiqasi siz uchun yangi bilimlar va yutuqlar bilan to'lsin. Muvaffaqiyat sizning hamyoningizda doimiy yorug' bo'lsin!",
-"Xayrli tong, kelajak mutaxassisi! Bugungi darslaringiz sizga yangi ufqlarni ochsin, o'qiganlaringiz amaliy hayotingizda asosiy tayanchingiz bo'lsin. Rivojlanishingiz doimiy va izchil bo'lsin!",
-"Ertalabgi salom, bilim izlovchi! Bugungi kun siz uchun foydali o'tsin, har bir darsda qilgan kashfiyotlaringiz kelajakdagi muvaffaqiyatlaringizning poydevori bo'lsin. Ijodingiz gullab-yashnasin!",
-"Tong nuri shu'lasida sog' bo'ling, talaba! Bugungi bilimlar to'plamingiz boyib, har bir yangi ma'lumot sizni professional yo'lingizda bir qadam oldinga olib chiqsin. O'qishlaringiz oson, natijalaringiz a'lo bo'lsin!",
-"Ertalabgi tong hayrli bo'lsin, g'ayratli yoshlar! Universitet kunlaringiz yorug' xotiralar bilan to'lsin, o'qituvchilaringiz sizga bilimdan ko'ra ko'proq — donishmandlik bersin. Taraqqiyotingiz tinimsiz davom etsin!",
-"Xayrli tong, ma'rifat faxriysi! Bugungi darslar sizni ruhan boyitsin, ilmiy izlanishlaringiz natijali bo'lsin, har bir fan sizning dunyoqarashingizni kengaytirsin. O'z sohangizda yetakchi mutaxassis bo'ling!",
-"Ertalabgi salom, intellektual! Bugungi bilimlar sizning qurolingiz, universitet esa sizning forjigingiz bo'lsin. Har bir ma'ruzada yangi g'oyalar tug'ilsin, amaliyotlarda mahoratingiz oshsin!",
-"Tong farovonligi bilan, talaba! Bugungi o'qishlaringiz sizga nafaqat diplom, balki hayotiy donolik bersin. Mutaxassisligingiz bo'yicha yetuk kadr bo'lib yetishingizga omad tilayman!",
-"Ertalabgi tong hayrli bo'lsin, ilm izlovchi! Bugungi kun sizga yangi ko'nikmalar, qiziqarli tajribalar olib kelsin. O'qituvchilaringiz sizga yo'l-yo'riq ko'rsatsin, do'stlaringiz bilan hamkorlikda o'rganing!",
-"Xayrli tong, universitetning yangi yulduzi! Bugungi darslaringiz sizning intellektual boyligingizni oshirsin, laboratoriya va amaliy mashg'ulotlarda kashfiyotlaringiz bo'lsin. O'qishdan zavqlaning va muvaffaqiyat qozoning!",
-"Ertalabgi salom, istiqbol mutaxassisi! Bugungi bilimlar sizning kelajakdagi loyihalaringizning asosi bo'lsin. Har bir fan sizga yangi imkoniyatlar ochsin, o'z sohangizda yetakchi bo'lishingizga omad!",
-"Tong shu'olasi sizga ma'rifat bag'ishlasin, talaba! Bugungi dars jarayonlari sizni kasbiy kamolot tomon olg'a intilsin. Ilm olish sizga zavq, natijalar esa g'urur olib kelsin!",
-"Ertalabgi tong hayrli bo'lsin, ma'rifatli yosh avlod! Universitetda o'tgan har bir kun sizning shaxsiy va kasbiy rivojlanishingizga xizmat qilsin. O'qituvchilar bilimlari, kitoblar donoliklari sizga yo'lchi bo'lsin!",
-"Xayrli tong, kelajak professor-o'qituvchisi! Bugungi darslaringiz samarali, o'qiganlaringiz yoddan chiqmasin, amaliyotlaringiz natijali bo'lsin. Ilm olish yo'lida har to'siqdan o'tish kuchingiz bo'lsin!",
-"Ertalabgi salom, universitet g'ururi! Bugungi kun sizga yangi bilimlar, qimmatli tajribalar olib kelsin. O'z mutaxassisligingiz bo'yicha nafaqat o'zbek, balki jahon miqyosida tanilgan mutaxassis bo'lishingizga omad tilayman!"
+"Ertalabgi tong hayrli bo‘lsin! Bugungi kuningiz yangi bilimlar va yutuqlarga boy bo‘lsin.",
+"Xayrli tong! Universitetdagi har bir daqiqa kelajagingiz uchun sarmoya bo‘lsin.",
+"Tong farovonligi siz bilan bo‘lsin! Ilm yo‘lingiz doimo yorug‘ bo‘lsin.",
+"Bugungi darslar sizni maqsadlaringizga bir qadam yaqinlashtirsin.",
+"Universitet — kelajak poydevori. Bugun ham o‘zingizni rivojlantiring!"
 ];
 
 if(!sessionStorage.msg){
@@ -140,16 +136,16 @@ if(!sessionStorage.msg){
 }
 document.getElementById("message").innerText = sessionStorage.msg;
 
-// ===== SOVG‘A (BA'ZIDA) =====
+// ===== SOVG‘A =====
 if(!sessionStorage.gift){
   let text = "🎉 Bugungi kuningiz omadli bo‘lsin!";
   if(Math.random() < 0.35){
     const gifts = [
-      "☕ Sizning sovg‘angiz: Coffee",
-      "🖊️ Sizning sovg‘angiz: Ruchka",
-      "🍫 Sizning sovg‘angiz: Shokolad"
+      "☕ Sovg‘a: Coffee",
+      "🖊️ Sovg‘a: Ruchka",
+      "🍫 Sovg‘a: Shokolad"
     ];
-    text = text + "\n" + gifts[Math.floor(Math.random()*gifts.length)];
+    text += "\n" + gifts[Math.floor(Math.random()*gifts.length)];
   }
   sessionStorage.gift = text;
 }
