@@ -22,11 +22,10 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  background:
-    radial-gradient(circle at top, #1e293b, #020617 70%);
+  background:radial-gradient(circle at top, #1e293b, #020617 70%);
 }
 
-/* ☁️ TINIQ BULUTLAR */
+/* ☁️ BULUTLAR */
 .clouds{
   position:fixed;
   inset:0;
@@ -81,7 +80,6 @@ input{
   outline:none;
 }
 
-/* 🔘 YANGI TUGMA RANGI */
 button{
   width:100%;
   padding:15px;
@@ -136,21 +134,12 @@ function go(){
     return;
   }
 
-  window.location.href =
+  location.href =
     "main.html?name=" + encodeURIComponent(n) +
     "&surname=" + encodeURIComponent(s) +
     "&group=" + encodeURIComponent(g);
 }
 </script>
-    return;
-  }
-
-  location.href =
-    "main.html?name="+encodeURIComponent(n)+
-    "&surname="+encodeURIComponent(s)+
-    "&group="+encodeURIComponent(g);
-}
-</script>
 
 </body>
-</html> 
+</html>
